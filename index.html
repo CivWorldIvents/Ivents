@@ -20,8 +20,7 @@
                 #283593, 
                 #3949ab, 
                 #5c6bc0,
-                #7986cb,
-                #9fa8da);
+                #7986cb);
             background-size: 400% 400%;
             color: white;
             min-height: 100vh;
@@ -46,11 +45,7 @@
                 radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
                 radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.3), transparent),
                 radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.3), transparent),
-                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent),
-                radial-gradient(3px 3px at 160px 120px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.3), transparent),
-                radial-gradient(1px 1px at 250px 150px, rgba(255,255,255,0.3), transparent),
-                radial-gradient(2px 2px at 300px 100px, rgba(255,255,255,0.3), transparent);
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent);
             z-index: -1;
             animation: twinkle 8s infinite alternate;
         }
@@ -162,22 +157,10 @@
             filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
         }
 
-        .time-info {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
         .current-time {
             font-size: 1.8rem;
             font-weight: 700;
             color: #40E0D0;
-        }
-
-        .timezone {
-            font-size: 1rem;
-            color: #87CEEB;
-            opacity: 0.9;
         }
 
         .tabs {
@@ -323,8 +306,8 @@
         }
 
         .event-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 30px;
             margin-top: 25px;
         }
@@ -370,49 +353,97 @@
             border-color: rgba(64, 224, 208, 0.5);
         }
 
-        .event-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 18px;
-            color: #FFD700;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .event-card h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #FF9800, transparent);
-            transition: width 0.3s ease;
-        }
-
-        .event-card:hover h3::after {
-            width: 100%;
-        }
-
-        .event-card p {
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: #e6f7ff;
+        .event-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
-        .event-details {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1rem;
-            color: #87CEEB;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid rgba(135, 206, 235, 0.3);
+        .event-type {
+            background: linear-gradient(45deg, #FF5252, #FF4081);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(255, 82, 82, 0.3);
         }
 
-        .event-details i {
-            margin-right: 8px;
-            font-size: 1.2rem;
+        .event-title {
+            font-size: 2rem;
+            color: #FFD700;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .event-details {
+            margin-top: 20px;
+        }
+
+        .event-row {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .event-label {
+            min-width: 220px;
+            color: #87CEEB;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .event-value {
+            color: #e6f7ff;
+            font-size: 1.1rem;
+            flex-grow: 1;
+        }
+
+        .copy-btn {
+            background: rgba(64, 224, 208, 0.2);
+            border: 1px solid rgba(64, 224, 208, 0.4);
+            color: #40E0D0;
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(64, 224, 208, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .copy-btn i {
+            font-size: 0.9rem;
+        }
+
+        .warp-text {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            font-family: monospace;
+            color: #FFD700;
+        }
+
+        .prizes-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .prize-item {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 6px 15px;
+            border-radius: 8px;
             color: #FFD700;
         }
 
@@ -551,12 +582,21 @@
                 padding: 18px 30px;
             }
             
-            .event-list {
-                grid-template-columns: 1fr;
-            }
-            
             .content {
                 padding: 25px;
+            }
+            
+            .event-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .event-label {
+                min-width: 100%;
+            }
+            
+            .event-title {
+                font-size: 1.6rem;
             }
         }
 
@@ -585,6 +625,12 @@
             .tab-content h2 {
                 font-size: 1.8rem;
             }
+            
+            .event-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -595,10 +641,7 @@
             <div class="subtitle">Ивенты</div>
             <div class="time-display">
                 <i class="fas fa-clock"></i>
-                <div class="time-info">
-                    <div class="current-time" id="currentTime"></div>
-                    <div class="timezone" id="timezone"></div>
-                </div>
+                <div class="current-time" id="currentTime"></div>
             </div>
         </header>
         
@@ -618,28 +661,256 @@
             <div id="pc" class="tab-content active">
                 <h2>пц ивенты</h2>
                 <div class="event-list">
+                    <!-- Красный свет Зелёный свет -->
                     <div class="event-card">
-                        <h3>Осада Дракона</h3>
-                        <p>Объединитесь с другими игроками, чтобы победить могучего древнего дракона, угрожающего землям Цивилизации.</p>
+                        <div class="event-header">
+                            <div class="event-type">ПЦ</div>
+                            <h3 class="event-title">Красный свет Зелёный свет</h3>
+                        </div>
+                        
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Еженедельно</span>
-                            <span><i class="fas fa-trophy"></i> Опыт, ресурсы</span>
+                            <div class="event-row">
+                                <div class="event-label">Время проведения:</div>
+                                <div class="event-value">можно проводить МНОГО раз в день (Каждые 30 минут)</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Призы:</div>
+                                <div class="event-value">
+                                    <div class="prizes-list">
+                                        <span class="prize-item">1 место - 50 монет</span>
+                                        <span class="prize-item">2 место - 35 монет</span>
+                                        <span class="prize-item">3 место - 25 монет</span>
+                                        <span class="prize-item">4 и 5 место - 15 монет</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Количество участников:</div>
+                                <div class="event-value">Минимум 5, максимум 30</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Варп для проведения:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">/warp red_green</span>
+                                    <button class="copy-btn" data-text="/warp red_green">
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Текст:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">&f&LСейчас будет проходить ивент "Красный свет Зеленый свет". Что бы попасть на него пропишите команду /warp red_green</span>
+                                    <button class="copy-btn" data-text='&f&LСейчас будет проходить ивент "Красный свет Зеленый свет". Что бы попасть на него пропишите команду /warp red_green'>
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Стеклянный мост -->
                     <div class="event-card">
-                        <h3>Защита Границы</h3>
-                        <p>Отбивайте волны наступающих монстров, защищая границы вашей цивилизации от вторжения.</p>
+                        <div class="event-header">
+                            <div class="event-type">ПЦ</div>
+                            <h3 class="event-title">Стеклянный мост</h3>
+                        </div>
+                        
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Каждые 3 дня</span>
-                            <span><i class="fas fa-trophy"></i> Артефакты, золото</span>
+                            <div class="event-row">
+                                <div class="event-label">Время проведения:</div>
+                                <div class="event-value">Можно проводить МНОГО раз в день (Каждые 30 минут)</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Призы:</div>
+                                <div class="event-value">
+                                    <div class="prizes-list">
+                                        <span class="prize-item">1 место - 65 монет</span>
+                                        <span class="prize-item">2 место - 50 монет</span>
+                                        <span class="prize-item">3 место - 35 монет</span>
+                                        <span class="prize-item">4 и 5 место - 15 монет</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Количество участников:</div>
+                                <div class="event-value">Минимум 6, максимум 15</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Варп для проведения:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">/warp gl_most</span>
+                                    <button class="copy-btn" data-text="/warp gl_most">
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Текст:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">&f&LСейчас будет проходить ивент "Стеклянный мост". Что бы попасть на него пропишите команду /warp gl_most</span>
+                                    <button class="copy-btn" data-text='&f&LСейчас будет проходить ивент "Стеклянный мост". Что бы попасть на него пропишите команду /warp gl_most'>
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Прятки -->
                     <div class="event-card">
-                        <h3>Поиск Реликвии</h3>
-                        <p>Исследуйте древние руины в поисках магических реликвий, которые даруют могущество вашей цивилизации.</p>
+                        <div class="event-header">
+                            <div class="event-type">ПЦ</div>
+                            <h3 class="event-title">Прятки</h3>
+                        </div>
+                        
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Раз в месяц</span>
-                            <span><i class="fas fa-trophy"></i> Реликвии, редкие ресурсы</span>
+                            <div class="event-row">
+                                <div class="event-label">Время проведения:</div>
+                                <div class="event-value">Можно проводить много раз в день (Каждые 40 минут)</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Призы:</div>
+                                <div class="event-value">
+                                    <div class="prizes-list">
+                                        <span class="prize-item">Каждому победившему по 35 монет</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Количество участников:</div>
+                                <div class="event-value">Минимум 5</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Варп для проведения:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">/warp Hide2</span>
+                                    <button class="copy-btn" data-text="/warp Hide2">
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Текст:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">&f&LСейчас будет проходить ивент "Прятки". Что бы попасть на него пропишите команду /warp Hide2</span>
+                                    <button class="copy-btn" data-text='&f&LСейчас будет проходить ивент "Прятки". Что бы попасть на него пропишите команду /warp Hide2'>
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Новогодние прятки -->
+                    <div class="event-card">
+                        <div class="event-header">
+                            <div class="event-type">ПЦ</div>
+                            <h3 class="event-title">Новогодние прятки</h3>
+                        </div>
+                        
+                        <div class="event-details">
+                            <div class="event-row">
+                                <div class="event-label">Время проведения:</div>
+                                <div class="event-value">Можно проводить много раз в день (Каждые 40 минут)</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Призы:</div>
+                                <div class="event-value">
+                                    <div class="prizes-list">
+                                        <span class="prize-item">Каждому победившему по 35 монет</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Количество участников:</div>
+                                <div class="event-value">Минимум 5</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Варп для проведения:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">/warp Hide3</span>
+                                    <button class="copy-btn" data-text="/warp Hide3">
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Текст:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">&f&LСейчас будет проходить ивент "Прятки". Что бы попасть на него пропишите команду /warp Hide3</span>
+                                    <button class="copy-btn" data-text='&f&LСейчас будет проходить ивент "Прятки". Что бы попасть на него пропишите команду /warp Hide3'>
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Сплиф -->
+                    <div class="event-card">
+                        <div class="event-header">
+                            <div class="event-type">ПЦ</div>
+                            <h3 class="event-title">Сплиф</h3>
+                        </div>
+                        
+                        <div class="event-details">
+                            <div class="event-row">
+                                <div class="event-label">Время проведения:</div>
+                                <div class="event-value">Можно проводить 10 раз в день (Каждый 1 час)</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Призы:</div>
+                                <div class="event-value">
+                                    <div class="prizes-list">
+                                        <span class="prize-item">Победителю 150 монет</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Количество участников:</div>
+                                <div class="event-value">Минимум 5</div>
+                            </div>
+                            
+                            <div class="event-row">
+                                <div class="event-label">Варп для проведения:</div>
+                                <div class="event-value">
+                                    <span class="warp-text">/warp mini_game_spleef</span>
+                                    <button class="copy-btn" data-text="/warp mini_game_spleef">
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                    <br>
+                                    <span style="margin-top: 5px; display: inline-block;">Для управления ивентом:</span>
+                                    <br>
+                                    <span class="warp-text" style="margin-top: 5px;">/warp SpLkLpK5939</span>
+                                    <button class="copy-btn" data-text="/warp SpLkLpK5939">
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                    <br>
+                                    <span class="warp-text" style="margin-top: 5px;">/warp SpLpEEf209029</span>
+                                    <button class="copy-btn" data-text="/warp SpLpEEf209029">
+                                        <i class="fas fa-copy"></i> Копировать
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -716,7 +987,6 @@
         function updateTime() {
             const now = new Date();
             const timeElement = document.getElementById('currentTime');
-            const timezoneElement = document.getElementById('timezone');
             
             // Форматируем время
             const hours = now.getHours().toString().padStart(2, '0');
@@ -728,13 +998,7 @@
             const month = (now.getMonth() + 1).toString().padStart(2, '0');
             const year = now.getFullYear();
             
-            // Получаем временную зону
-            const timezoneOffset = -now.getTimezoneOffset() / 60;
-            const timezoneSign = timezoneOffset >= 0 ? '+' : '-';
-            const timezoneAbs = Math.abs(timezoneOffset);
-            
             timeElement.textContent = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
-            timezoneElement.textContent = `GMT${timezoneSign}${timezoneAbs}`;
         }
         
         // Обновляем время каждую секунду
@@ -757,6 +1021,43 @@
             });
         });
         
+        // Функция копирования текста
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Показываем уведомление об успешном копировании
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(64, 224, 208, 0.9);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    z-index: 1000;
+                    animation: fadeInOut 3s ease;
+                `;
+                notification.innerHTML = '<i class="fas fa-check"></i> Текст скопирован в буфер обмена!';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+            });
+        }
+        
+        // Добавляем обработчики для кнопок копирования
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('copy-btn') || e.target.closest('.copy-btn')) {
+                const btn = e.target.classList.contains('copy-btn') ? e.target : e.target.closest('.copy-btn');
+                const textToCopy = btn.getAttribute('data-text');
+                copyToClipboard(textToCopy);
+            }
+        });
+        
         // Анимация при наведении на карточки
         document.querySelectorAll('.event-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
@@ -767,6 +1068,18 @@
                 this.style.transform = 'translateY(0) scale(1)';
             });
         });
+        
+        // CSS для анимации уведомления
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translateY(-20px); }
+                10% { opacity: 1; transform: translateY(0); }
+                90% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
         
         // Перезапуск анимации заголовка для плавности
         const title = document.querySelector('.main-title');
