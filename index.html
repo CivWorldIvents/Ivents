@@ -10,38 +10,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', Tahoma, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0a1931 0%, #1a237e 30%, #283593 50%, #3949ab 70%, #5c6bc0 100%);
+            background: linear-gradient(-45deg, #0c2461, #1e3799, #4a69bd, #6a89cc, #4a69bd, #1e3799);
+            background-size: 400% 400%;
             color: white;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            animation: bgShift 15s infinite alternate;
-        }
-
-        /* Анимированные мечи Minecraft */
-        .swords-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.2;
-        }
-
-        .sword {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/2750/2750762.png');
-            filter: brightness(1.2) drop-shadow(0 0 8px rgba(0, 200, 255, 0.5));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            animation: gradientShift 15s ease infinite;
         }
 
         .container {
@@ -51,60 +32,55 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 30px 20px;
+            padding: 20px;
             width: 100%;
-            background: rgba(10, 25, 49, 0.4);
-            border-radius: 20px;
-            border: 2px solid rgba(64, 156, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
-            margin-top: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #40c9ff, #4dabf7, #339af0, transparent);
-            animation: headerGlow 3s infinite linear;
         }
 
         .main-title {
-            font-size: 5rem;
-            font-weight: 800;
+            font-size: 5.5rem;
+            font-weight: 900;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #4fc3f7, #29b6f6, #0288d1, #01579b);
+            background: linear-gradient(45deg, #87CEEB, #00BFFF, #1E90FF, #4169E1);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            animation: titleFlow 8s infinite linear;
-            background-size: 200% auto;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+            animation: pulse 3s infinite alternate;
         }
 
         .subtitle {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            background: linear-gradient(45deg, #ff9800, #ff5722, #f4511e, #d84315);
+            background: linear-gradient(to right, #FFD700, #FF8C00, #FF4500);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: subtitleFlow 6s infinite linear;
-            background-size: 200% auto;
+            margin-bottom: 10px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-display {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            animation: timePulse 2s infinite alternate;
+        }
+
+        .time-display i {
+            margin-right: 10px;
+            color: #FFD700;
         }
 
         .tabs {
@@ -121,74 +97,59 @@
             padding: 18px 35px;
             font-size: 1.4rem;
             font-weight: 600;
-            background: rgba(25, 55, 109, 0.5);
-            border: 2px solid rgba(64, 156, 255, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
             border-radius: 12px;
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             flex: 1;
-            min-width: 250px;
+            min-width: 220px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .tab::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
+            left: 0;
+            width: 0;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(64, 156, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            transition: width 0.5s ease;
+            z-index: -1;
         }
 
         .tab:hover::before {
-            left: 100%;
+            width: 100%;
         }
 
         .tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 100, 255, 0.3);
-            border-color: rgba(64, 156, 255, 0.7);
-            background: rgba(25, 55, 109, 0.7);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .tab.active {
-            background: linear-gradient(135deg, #1976d2, #2196f3);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(33, 150, 243, 0.4);
-            border-color: rgba(100, 181, 246, 0.8);
+            background: linear-gradient(45deg, #1E90FF, #4169E1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.4);
         }
 
         .content {
             width: 100%;
-            max-width: 1100px;
-            background: rgba(15, 35, 70, 0.5);
-            border-radius: 18px;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            min-height: 450px;
-            border: 2px solid rgba(64, 156, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            min-height: 400px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #4fc3f7, #29b6f6, #0288d1, transparent);
-            animation: contentGlow 4s infinite linear;
         }
 
         .tab-content {
@@ -201,167 +162,80 @@
         }
 
         .tab-content h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 25px;
-            color: #4fc3f7;
+            color: #87CEEB;
             text-align: center;
             padding-bottom: 15px;
-            border-bottom: 2px solid rgba(79, 195, 247, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tab-content h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff9800, transparent);
-            animation: h2Flow 3s infinite linear;
+            border-bottom: 2px solid rgba(135, 206, 235, 0.3);
         }
 
         .event-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
             margin-top: 20px;
         }
 
         .event-card {
-            background: linear-gradient(145deg, rgba(30, 60, 114, 0.6), rgba(20, 40, 80, 0.8));
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(64, 156, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .event-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(64, 156, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .event-card:hover::before {
-            left: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .event-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(64, 156, 255, 0.6);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .event-card h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
-            color: #ffb74d;
-            position: relative;
-            padding-bottom: 8px;
-        }
-
-        .event-card h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #ff9800, transparent);
+            color: #FFD700;
         }
 
         .event-card p {
             font-size: 1.1rem;
-            line-height: 1.6;
-            color: #e3f2fd;
+            line-height: 1.5;
+            color: #f0f8ff;
             margin-bottom: 15px;
         }
 
         .event-details {
             display: flex;
             justify-content: space-between;
-            font-size: 0.95rem;
-            color: #81d4fa;
-            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #87CEEB;
+            margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid rgba(129, 212, 250, 0.3);
-        }
-
-        .event-details i {
-            margin-right: 5px;
-            font-size: 1rem;
+            border-top: 1px solid rgba(135, 206, 235, 0.2);
         }
 
         .footer {
             margin-top: 40px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
             padding: 20px;
             width: 100%;
         }
 
-        /* Анимации */
-        @keyframes bgShift {
-            0%, 100% {
-                background: linear-gradient(135deg, #0a1931 0%, #1a237e 30%, #283593 50%, #3949ab 70%, #5c6bc0 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #0a1931 0%, #1a237e 40%, #283593 60%, #3949ab 80%, #5c6bc0 100%);
-            }
+        .icon {
+            font-size: 1.4rem;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
-        @keyframes titleFlow {
+        @keyframes pulse {
             0% {
-                background-position: 0% center;
+                text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             }
             100% {
-                background-position: 200% center;
-            }
-        }
-
-        @keyframes subtitleFlow {
-            0% {
-                background-position: 0% center;
-            }
-            100% {
-                background-position: 200% center;
-            }
-        }
-
-        @keyframes headerGlow {
-            0% {
-                background-position: -200px 0;
-            }
-            100% {
-                background-position: calc(200px + 100%) 0;
-            }
-        }
-
-        @keyframes contentGlow {
-            0% {
-                background-position: -200px 0;
-            }
-            100% {
-                background-position: calc(200px + 100%) 0;
-            }
-        }
-
-        @keyframes h2Flow {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
+                text-shadow: 0 5px 25px rgba(30, 144, 255, 0.5);
             }
         }
 
@@ -376,56 +250,45 @@
             }
         }
 
-        /* Анимация мечей */
-        @keyframes floatSword1 {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.2; }
-            25% { transform: translate(80px, 120px) rotate(90deg); opacity: 0.3; }
-            50% { transform: translate(160px, 40px) rotate(180deg); opacity: 0.2; }
-            75% { transform: translate(40px, 160px) rotate(270deg); opacity: 0.3; }
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        @keyframes floatSword2 {
-            0%, 100% { transform: translate(0, 0) rotate(45deg); opacity: 0.2; }
-            33% { transform: translate(120px, 80px) rotate(135deg); opacity: 0.3; }
-            66% { transform: translate(-80px, 160px) rotate(225deg); opacity: 0.2; }
-        }
-
-        @keyframes floatSword3 {
-            0%, 100% { transform: translate(0, 0) rotate(-30deg); opacity: 0.2; }
-            20% { transform: translate(160px, 40px) rotate(60deg); opacity: 0.3; }
-            40% { transform: translate(80px, 160px) rotate(150deg); opacity: 0.2; }
-            60% { transform: translate(-40px, 80px) rotate(240deg); opacity: 0.3; }
-            80% { transform: translate(120px, -40px) rotate(330deg); opacity: 0.2; }
+        @keyframes timePulse {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            }
         }
 
         /* Адаптивность */
-        @media (max-width: 992px) {
-            .main-title {
-                font-size: 4rem;
-            }
-            
-            .subtitle {
-                font-size: 2.5rem;
-            }
-            
-            .event-list {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            }
-        }
-
         @media (max-width: 768px) {
             .main-title {
-                font-size: 3.2rem;
+                font-size: 3.5rem;
             }
             
             .subtitle {
                 font-size: 2rem;
             }
             
+            .time-display {
+                font-size: 1.2rem;
+                padding: 8px 15px;
+            }
+            
             .tab {
                 min-width: 100%;
                 font-size: 1.2rem;
-                padding: 15px 25px;
             }
             
             .event-list {
@@ -435,143 +298,140 @@
             .content {
                 padding: 20px;
             }
-            
-            .tab-content h2 {
-                font-size: 2rem;
-            }
         }
 
         @media (max-width: 480px) {
             .main-title {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .subtitle {
-                font-size: 1.8rem;
-            }
-            
-            .tab {
-                padding: 12px 20px;
-            }
-            
-            .tab-content h2 {
                 font-size: 1.6rem;
             }
             
-            .event-card h3 {
-                font-size: 1.5rem;
+            .time-display {
+                font-size: 1rem;
+            }
+            
+            .tab {
+                padding: 15px 20px;
+            }
+            
+            .tab-content h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Контейнер для летающих мечей -->
-    <div class="swords-container" id="swordsContainer"></div>
-    
     <div class="container">
         <header class="header">
             <h1 class="main-title">CivWorld</h1>
             <div class="subtitle">Ивенты</div>
+            <div class="time-display">
+                <i class="fas fa-clock"></i>
+                <span id="currentTime"></span>
+            </div>
         </header>
         
         <div class="tabs">
-            <button class="tab active" data-tab="pvp">
-                ПВПЦ Ивенты
+            <button class="tab active" data-tab="pc">
+                пц ивенты
             </button>
-            <button class="tab" data-tab="pve">
-                ПЦ Ивенты
+            <button class="tab" data-tab="pvp">
+                пвпц ивенты
             </button>
             <button class="tab" data-tab="cl">
-                ЦЛ Ивенты
+                цл ивенты
             </button>
         </div>
         
         <div class="content">
-            <div id="pvp" class="tab-content active">
-                <h2>ПВПЦ Ивенты</h2>
+            <div id="pc" class="tab-content active">
+                <h2>пц ивенты</h2>
                 <div class="event-list">
                     <div class="event-card">
-                        <h3>Великая война цивилизаций</h3>
-                        <p>Масштабное сражение между альянсами цивилизаций за контроль над стратегическими ресурсами и территориями. Используйте тактику, дипломатию и силу, чтобы победить.</p>
+                        <h3>Осада Дракона</h3>
+                        <p>Объединитесь с другими игроками, чтобы победить могучего древнего дракона, угрожающего землям Цивилизации.</p>
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Раз в 2 недели</span>
-                            <span><i class="fas fa-trophy"></i> Эксклюзивные ресурсы</span>
+                            <span><i class="fas fa-calendar-alt"></i> Еженедельно</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Опыт, ресурсы</span>
                         </div>
                     </div>
                     <div class="event-card">
-                        <h3>Королевская арена</h3>
-                        <p>Ежедневные дуэли на арене для определения сильнейших бойцов. Поднимайтесь в рейтинге, получайте звания и особые привилегии для вашей цивилизации.</p>
+                        <h3>Защита Границы</h3>
+                        <p>Отбивайте волны наступающих монстров, защищая границы вашей цивилизации от вторжения.</p>
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Ежедневно</span>
-                            <span><i class="fas fa-trophy"></i> Звания, привилегии</span>
+                            <span><i class="fas fa-calendar-alt"></i> Каждые 3 дня</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Артефакты, золото</span>
                         </div>
                     </div>
                     <div class="event-card">
-                        <h3>Битва за крепость</h3>
-                        <p>Захватите легендарную крепость, сражаясь с другими игроками в режиме реального времени. Защищайте свои позиции и используйте осадные орудия.</p>
+                        <h3>Поиск Реликвии</h3>
+                        <p>Исследуйте древние руины в поисках магических реликвий, которые даруют могущество вашей цивилизации.</p>
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> По выходным</span>
-                            <span><i class="fas fa-trophy"></i> Уникальные артефакты</span>
+                            <span><i class="fas fa-calendar-alt"></i> Раз в месяц</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Реликвии, редкие ресурсы</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div id="pve" class="tab-content">
-                <h2>ПЦ Ивенты</h2>
+            <div id="pvp" class="tab-content">
+                <h2>пвпц ивенты</h2>
                 <div class="event-list">
                     <div class="event-card">
-                        <h3>Охота на древнего дракона</h3>
-                        <p>Объединитесь с другими игроками, чтобы победить могучего древнего дракона, угрожающего землям Цивилизации. Требуется координация и стратегия.</p>
+                        <h3>Война Цивилизаций</h3>
+                        <p>Сразитесь с другими цивилизациями в масштабной битве за контроль над стратегическими территориями.</p>
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Еженедельно</span>
-                            <span><i class="fas fa-trophy"></i> Драконьи ресурсы</span>
+                            <span><i class="fas fa-calendar-alt"></i> Раз в 2 недели</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Слава, территории</span>
                         </div>
                     </div>
                     <div class="event-card">
-                        <h3>Защита столицы</h3>
-                        <p>Отбивайте волны наступающих монстров, защищая столицу вашей цивилизации от вторжения сил тьмы. Улучшайте оборону и укрепляйте союзы.</p>
+                        <h3>Арена Героев</h3>
+                        <p>Соревнуйтесь в дуэлях с другими игроками на арене, чтобы доказать свое мастерство и подняться в рейтинге.</p>
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Каждые 3 дня</span>
-                            <span><i class="fas fa-trophy"></i> Редкие материалы</span>
+                            <span><i class="fas fa-calendar-alt"></i> Ежедневно</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Очки арены, звания</span>
                         </div>
                     </div>
                     <div class="event-card">
-                        <h3>Поиск забытых реликвий</h3>
-                        <p>Исследуйте древние руины и подземелья в поисках магических реликвий, которые даруют могущество вашей цивилизации.</p>
+                        <h3>Захват Крепости</h3>
+                        <p>Захватите вражескую крепость, защищая свою собственную в напряженном PvP-противостоянии.</p>
                         <div class="event-details">
-                            <span><i class="fas fa-calendar-alt"></i> Раз в месяц</span>
-                            <span><i class="fas fa-trophy"></i> Магические артефакты</span>
+                            <span><i class="fas fa-calendar-alt"></i> По выходным</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Ресурсы, бонусы защиты</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div id="cl" class="tab-content">
-                <h2>ЦЛ Ивенты</h2>
+                <h2>цл ивенты</h2>
                 <div class="event-list">
                     <div class="event-card">
-                        <h3>Лига чемпионов цивилизаций</h3>
-                        <p>Элитное соревнование топовых цивилизаций в серии сложнейших испытаний. Докажите, что ваша цивилизация достойна титула Чемпиона Лиги.</p>
+                        <h3>Лига Чемпионов</h3>
+                        <p>Соревнуйтесь с другими цивилизациями в серии испытаний, чтобы получить титул Чемпиона Лиги.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Сезонно</span>
-                            <span><i class="fas fa-trophy"></i> Легендарные титулы</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Титулы, эксклюзивные награды</span>
                         </div>
                     </div>
                     <div class="event-card">
-                        <h3>Турнир великих союзов</h3>
-                        <p>Масштабный турнир альянсов цивилизаций. Объединитесь с союзниками, разработайте стратегию и победите в турнире для получения привилегий.</p>
+                        <h3>Турнир Союзов</h3>
+                        <p>Объединитесь с союзниками, чтобы победить в турнире и получить привилегии для всей вашей цивилизации.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Раз в месяц</span>
-                            <span><i class="fas fa-trophy"></i> Эксклюзивные бусты</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Привилегии, бусты</span>
                         </div>
                     </div>
                     <div class="event-card">
-                        <h3>Элитная битва титанов</h3>
-                        <p>Эксклюзивное событие для самых развитых цивилизаций с уникальными испытаниями и наградами. Только для цивилизаций высшего ранга.</p>
+                        <h3>Элитная Лига</h3>
+                        <p>Эксклюзивное событие для самых развитых цивилизаций с уникальными испытаниями и наградами.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Раз в сезон</span>
-                            <span><i class="fas fa-trophy"></i> Мифические реликвии</span>
+                            <span><i class="fas fa-trophy"></i> Награды: Легендарные артефакты</span>
                         </div>
                     </div>
                 </div>
@@ -584,44 +444,29 @@
     </div>
 
     <script>
-        // Создаем летающие мечи Minecraft
-        function createSwords() {
-            const container = document.getElementById('swordsContainer');
-            const animations = ['floatSword1', 'floatSword2', 'floatSword3'];
+        // Функция обновления времени
+        function updateTime() {
+            const now = new Date();
+            const timeElement = document.getElementById('currentTime');
             
-            // Создаем 9 мечей
-            for (let i = 0; i < 9; i++) {
-                const sword = document.createElement('div');
-                const animationIndex = i % 3;
-                
-                sword.className = 'sword';
-                
-                // Случайная начальная позиция
-                const startX = Math.random() * 100;
-                const startY = Math.random() * 100;
-                
-                sword.style.left = `${startX}%`;
-                sword.style.top = `${startY}%`;
-                
-                // Случайный размер
-                const size = 50 + Math.random() * 40;
-                sword.style.width = `${size}px`;
-                sword.style.height = `${size}px`;
-                
-                // Случайный цветовой фильтр
-                const hue = Math.random() * 360;
-                sword.style.filter = `hue-rotate(${hue}deg) brightness(1.2) drop-shadow(0 0 8px rgba(0, 200, 255, 0.5))`;
-                
-                // Случайная анимация
-                const duration = 25 + Math.random() * 20;
-                sword.style.animation = `${animations[animationIndex]} ${duration}s infinite linear`;
-                
-                // Случайная задержка анимации
-                sword.style.animationDelay = `${Math.random() * 5}s`;
-                
-                container.appendChild(sword);
-            }
+            // Форматируем дату и время
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZoneName: 'short'
+            };
+            
+            timeElement.textContent = now.toLocaleDateString('ru-RU', options);
         }
+        
+        // Обновляем время каждую секунду
+        updateTime();
+        setInterval(updateTime, 1000);
         
         // Переключение вкладок
         document.querySelectorAll('.tab').forEach(tab => {
@@ -639,23 +484,25 @@
             });
         });
         
-        // Создаем мечи при загрузке страницы
-        window.addEventListener('DOMContentLoaded', createSwords);
+        // Добавим немного интерактивности
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
         
-        // Анимация заголовков
+        // Анимация заголовка
+        const title = document.querySelector('.main-title');
         setInterval(() => {
-            const title = document.querySelector('.main-title');
-            const subtitle = document.querySelector('.subtitle');
-            
-            // Перезапускаем анимацию для плавности
             title.style.animation = 'none';
-            subtitle.style.animation = 'none';
-            
             setTimeout(() => {
-                title.style.animation = 'titleFlow 8s infinite linear';
-                subtitle.style.animation = 'subtitleFlow 6s infinite linear';
+                title.style.animation = 'pulse 3s infinite alternate';
             }, 10);
-        }, 16000);
+        }, 8000);
     </script>
 </body>
 </html>
