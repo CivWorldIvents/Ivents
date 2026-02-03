@@ -14,7 +14,14 @@
         }
 
         body {
-            background: linear-gradient(-45deg, #0c2461, #1e3799, #4a69bd, #6a89cc, #4a69bd, #1e3799);
+            background: linear-gradient(-45deg, 
+                #0a1931, 
+                #1a237e, 
+                #283593, 
+                #3949ab, 
+                #5c6bc0,
+                #7986cb,
+                #9fa8da);
             background-size: 400% 400%;
             color: white;
             min-height: 100vh;
@@ -22,7 +29,30 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            animation: gradientShift 15s ease infinite;
+            animation: gradientFlow 20s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Эффект звезд на фоне */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(3px 3px at 160px 120px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 250px 150px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(2px 2px at 300px 100px, rgba(255,255,255,0.3), transparent);
+            z-index: -1;
+            animation: twinkle 8s infinite alternate;
         }
 
         .container {
@@ -32,55 +62,122 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 1;
         }
 
         .header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 20px;
+            padding: 25px;
             width: 100%;
+            background: rgba(10, 25, 47, 0.6);
+            border-radius: 20px;
+            border: 2px solid rgba(64, 224, 208, 0.3);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 0 40px rgba(64, 224, 208, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(64, 224, 208, 0.1), 
+                rgba(30, 144, 255, 0.1), 
+                transparent);
+            animation: headerShine 6s infinite linear;
         }
 
         .main-title {
             font-size: 5.5rem;
             font-weight: 900;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #87CEEB, #00BFFF, #1E90FF, #4169E1);
+            background: linear-gradient(45deg, 
+                #87CEEB, 
+                #00BFFF, 
+                #1E90FF, 
+                #4169E1,
+                #87CEEB);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(30, 144, 255, 0.2);
             letter-spacing: 2px;
-            animation: pulse 3s infinite alternate;
+            animation: titleGlow 4s infinite alternate;
+            background-size: 200% auto;
+            position: relative;
         }
 
         .subtitle {
             font-size: 2.8rem;
             font-weight: 700;
-            background: linear-gradient(to right, #FFD700, #FF8C00, #FF4500);
+            background: linear-gradient(to right, 
+                #FFD700, 
+                #FF8C00, 
+                #FF4500,
+                #FF8C00,
+                #FFD700);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 10px;
-            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            text-shadow: 
+                0 3px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(255, 100, 0, 0.2);
+            animation: subtitleFlow 5s infinite linear;
+            background-size: 200% auto;
         }
 
         .time-display {
             font-size: 1.5rem;
             font-weight: 600;
-            margin-top: 15px;
-            padding: 10px 25px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: inline-block;
-            animation: timePulse 2s infinite alternate;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: rgba(0, 20, 40, 0.6);
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(64, 224, 208, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            animation: timeGlow 3s infinite alternate;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 0 15px rgba(64, 224, 208, 0.1);
         }
 
         .time-display i {
-            margin-right: 10px;
             color: #FFD700;
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+        }
+
+        .time-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .current-time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #40E0D0;
+        }
+
+        .timezone {
+            font-size: 1rem;
+            color: #87CEEB;
+            opacity: 0.9;
         }
 
         .tabs {
@@ -94,67 +191,101 @@
         }
 
         .tab {
-            padding: 18px 35px;
-            font-size: 1.4rem;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 12px;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, 
+                rgba(30, 60, 114, 0.7), 
+                rgba(20, 40, 80, 0.9));
+            border: 2px solid rgba(64, 224, 208, 0.3);
+            border-radius: 15px;
             color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(64, 224, 208, 0.1);
             backdrop-filter: blur(10px);
             flex: 1;
-            min-width: 220px;
+            min-width: 240px;
             text-align: center;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            letter-spacing: 1px;
         }
 
         .tab::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 0;
+            left: -100%;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left 0.7s ease;
             z-index: -1;
         }
 
         .tab:hover::before {
-            width: 100%;
+            left: 100%;
         }
 
         .tab:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(64, 224, 208, 0.3),
+                inset 0 0 30px rgba(64, 224, 208, 0.2);
+            border-color: rgba(64, 224, 208, 0.7);
         }
 
         .tab.active {
-            background: linear-gradient(45deg, #1E90FF, #4169E1);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.4);
+            background: linear-gradient(135deg, #1E90FF, #4169E1);
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 30px rgba(30, 144, 255, 0.4),
+                inset 0 0 30px rgba(100, 200, 255, 0.3);
+            border-color: rgba(100, 200, 255, 0.8);
         }
 
         .content {
             width: 100%;
             max-width: 1000px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(15, 30, 60, 0.7);
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 35px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 50px rgba(64, 224, 208, 0.15);
             backdrop-filter: blur(15px);
-            min-height: 400px;
+            min-height: 450px;
             transition: all 0.3s ease;
+            border: 2px solid rgba(64, 224, 208, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(64, 224, 208, 0.05), 
+                transparent);
+            animation: contentShine 8s infinite linear;
         }
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeInUp 0.6s ease;
         }
 
         .tab-content.active {
@@ -162,112 +293,234 @@
         }
 
         .tab-content h2 {
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
             color: #87CEEB;
             text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(135, 206, 235, 0.3);
+            padding-bottom: 20px;
+            border-bottom: 3px solid rgba(135, 206, 235, 0.4);
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                #FFD700, 
+                transparent);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .tab-content.active h2::after {
+            transform: scaleX(1);
         }
 
         .event-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
         }
 
         .event-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(145deg, 
+                rgba(40, 70, 130, 0.7), 
+                rgba(25, 45, 90, 0.9));
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 0 25px rgba(64, 224, 208, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(64, 224, 208, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .event-card:hover::before {
+            left: 100%;
         }
 
         .event-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 35px rgba(64, 224, 208, 0.3);
+            border-color: rgba(64, 224, 208, 0.5);
         }
 
         .event-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 18px;
             color: #FFD700;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .event-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #FF9800, transparent);
+            transition: width 0.3s ease;
+        }
+
+        .event-card:hover h3::after {
+            width: 100%;
         }
 
         .event-card p {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #f0f8ff;
-            margin-bottom: 15px;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #e6f7ff;
+            margin-bottom: 20px;
         }
 
         .event-details {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #87CEEB;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(135, 206, 235, 0.2);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(135, 206, 235, 0.3);
+        }
+
+        .event-details i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+            color: #FFD700;
         }
 
         .footer {
-            margin-top: 40px;
+            margin-top: 50px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
             padding: 20px;
             width: 100%;
+            background: rgba(10, 25, 47, 0.4);
+            border-radius: 15px;
+            border: 1px solid rgba(64, 224, 208, 0.2);
         }
 
-        .icon {
-            font-size: 1.4rem;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        @keyframes pulse {
-            0% {
-                text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            }
-            100% {
-                text-shadow: 0 5px 25px rgba(30, 144, 255, 0.5);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes gradientShift {
+        /* Анимации */
+        @keyframes gradientFlow {
             0% {
                 background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 25%;
             }
             50% {
                 background-position: 100% 50%;
             }
+            75% {
+                background-position: 50% 75%;
+            }
             100% {
                 background-position: 0% 50%;
             }
         }
 
-        @keyframes timePulse {
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes titleGlow {
             0% {
-                box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.3),
+                    0 0 30px rgba(30, 144, 255, 0.2);
+                background-position: 0% center;
             }
             100% {
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+                text-shadow: 
+                    0 5px 25px rgba(0, 0, 0, 0.4),
+                    0 0 50px rgba(30, 144, 255, 0.4);
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes subtitleFlow {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes timeGlow {
+            0% {
+                box-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.3),
+                    inset 0 0 15px rgba(64, 224, 208, 0.1),
+                    0 0 10px rgba(64, 224, 208, 0.2);
+            }
+            100% {
+                box-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.3),
+                    inset 0 0 15px rgba(64, 224, 208, 0.1),
+                    0 0 20px rgba(64, 224, 208, 0.4);
+            }
+        }
+
+        @keyframes headerShine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes contentShine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -283,12 +536,19 @@
             
             .time-display {
                 font-size: 1.2rem;
-                padding: 8px 15px;
+                padding: 10px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .current-time {
+                font-size: 1.5rem;
             }
             
             .tab {
                 min-width: 100%;
-                font-size: 1.2rem;
+                font-size: 1.3rem;
+                padding: 18px 30px;
             }
             
             .event-list {
@@ -296,7 +556,7 @@
             }
             
             .content {
-                padding: 20px;
+                padding: 25px;
             }
         }
 
@@ -311,6 +571,11 @@
             
             .time-display {
                 font-size: 1rem;
+                padding: 8px 15px;
+            }
+            
+            .current-time {
+                font-size: 1.3rem;
             }
             
             .tab {
@@ -330,7 +595,10 @@
             <div class="subtitle">Ивенты</div>
             <div class="time-display">
                 <i class="fas fa-clock"></i>
-                <span id="currentTime"></span>
+                <div class="time-info">
+                    <div class="current-time" id="currentTime"></div>
+                    <div class="timezone" id="timezone"></div>
+                </div>
             </div>
         </header>
         
@@ -355,7 +623,7 @@
                         <p>Объединитесь с другими игроками, чтобы победить могучего древнего дракона, угрожающего землям Цивилизации.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Еженедельно</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Опыт, ресурсы</span>
+                            <span><i class="fas fa-trophy"></i> Опыт, ресурсы</span>
                         </div>
                     </div>
                     <div class="event-card">
@@ -363,7 +631,7 @@
                         <p>Отбивайте волны наступающих монстров, защищая границы вашей цивилизации от вторжения.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Каждые 3 дня</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Артефакты, золото</span>
+                            <span><i class="fas fa-trophy"></i> Артефакты, золото</span>
                         </div>
                     </div>
                     <div class="event-card">
@@ -371,7 +639,7 @@
                         <p>Исследуйте древние руины в поисках магических реликвий, которые даруют могущество вашей цивилизации.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Раз в месяц</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Реликвии, редкие ресурсы</span>
+                            <span><i class="fas fa-trophy"></i> Реликвии, редкие ресурсы</span>
                         </div>
                     </div>
                 </div>
@@ -385,7 +653,7 @@
                         <p>Сразитесь с другими цивилизациями в масштабной битве за контроль над стратегическими территориями.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Раз в 2 недели</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Слава, территории</span>
+                            <span><i class="fas fa-trophy"></i> Слава, территории</span>
                         </div>
                     </div>
                     <div class="event-card">
@@ -393,7 +661,7 @@
                         <p>Соревнуйтесь в дуэлях с другими игроками на арене, чтобы доказать свое мастерство и подняться в рейтинге.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Ежедневно</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Очки арены, звания</span>
+                            <span><i class="fas fa-trophy"></i> Очки арены, звания</span>
                         </div>
                     </div>
                     <div class="event-card">
@@ -401,7 +669,7 @@
                         <p>Захватите вражескую крепость, защищая свою собственную в напряженном PvP-противостоянии.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> По выходным</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Ресурсы, бонусы защиты</span>
+                            <span><i class="fas fa-trophy"></i> Ресурсы, бонусы защиты</span>
                         </div>
                     </div>
                 </div>
@@ -415,7 +683,7 @@
                         <p>Соревнуйтесь с другими цивилизациями в серии испытаний, чтобы получить титул Чемпиона Лиги.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Сезонно</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Титулы, эксклюзивные награды</span>
+                            <span><i class="fas fa-trophy"></i> Титулы, эксклюзивные награды</span>
                         </div>
                     </div>
                     <div class="event-card">
@@ -423,7 +691,7 @@
                         <p>Объединитесь с союзниками, чтобы победить в турнире и получить привилегии для всей вашей цивилизации.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Раз в месяц</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Привилегии, бусты</span>
+                            <span><i class="fas fa-trophy"></i> Привилегии, бусты</span>
                         </div>
                     </div>
                     <div class="event-card">
@@ -431,7 +699,7 @@
                         <p>Эксклюзивное событие для самых развитых цивилизаций с уникальными испытаниями и наградами.</p>
                         <div class="event-details">
                             <span><i class="fas fa-calendar-alt"></i> Раз в сезон</span>
-                            <span><i class="fas fa-trophy"></i> Награды: Легендарные артефакты</span>
+                            <span><i class="fas fa-trophy"></i> Легендарные артефакты</span>
                         </div>
                     </div>
                 </div>
@@ -448,20 +716,25 @@
         function updateTime() {
             const now = new Date();
             const timeElement = document.getElementById('currentTime');
+            const timezoneElement = document.getElementById('timezone');
             
-            // Форматируем дату и время
-            const options = {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                timeZoneName: 'short'
-            };
+            // Форматируем время
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
             
-            timeElement.textContent = now.toLocaleDateString('ru-RU', options);
+            // Форматируем дату
+            const day = now.getDate().toString().padStart(2, '0');
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const year = now.getFullYear();
+            
+            // Получаем временную зону
+            const timezoneOffset = -now.getTimezoneOffset() / 60;
+            const timezoneSign = timezoneOffset >= 0 ? '+' : '-';
+            const timezoneAbs = Math.abs(timezoneOffset);
+            
+            timeElement.textContent = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+            timezoneElement.textContent = `GMT${timezoneSign}${timezoneAbs}`;
         }
         
         // Обновляем время каждую секунду
@@ -484,7 +757,7 @@
             });
         });
         
-        // Добавим немного интерактивности
+        // Анимация при наведении на карточки
         document.querySelectorAll('.event-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -495,14 +768,19 @@
             });
         });
         
-        // Анимация заголовка
+        // Перезапуск анимации заголовка для плавности
         const title = document.querySelector('.main-title');
+        const subtitle = document.querySelector('.subtitle');
+        
         setInterval(() => {
             title.style.animation = 'none';
+            subtitle.style.animation = 'none';
+            
             setTimeout(() => {
-                title.style.animation = 'pulse 3s infinite alternate';
+                title.style.animation = 'titleGlow 4s infinite alternate';
+                subtitle.style.animation = 'subtitleFlow 5s infinite linear';
             }, 10);
-        }, 8000);
+        }, 12000);
     </script>
 </body>
 </html>
